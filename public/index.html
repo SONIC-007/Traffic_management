@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Smart AI-Based Traffic Management Dashboard - Real-time monitoring and adaptive traffic light control">
+  <title>Dashboard | Smart Traffic Manager</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <span class="logo">🚦</span>
+      <h1>Smart Traffic Manager</h1>
+    </div>
+    <div class="header-right">
+      <div>
+        <div class="user-info" id="user-name">--</div>
+        <div class="user-role" id="user-role">--</div>
+      </div>
+      <button class="btn btn-outline" id="logout-btn" onclick="handleLogout()">Logout</button>
+    </div>
+  </header>
+
+  <!-- Dashboard Grid -->
+  <div class="dashboard container">
+
+    <!-- Sidebar: Intersection List -->
+    <aside class="sidebar glass-card">
+      <h2>📍 Intersections</h2>
+      <ul class="intersection-list" id="intersection-list">
+        <!-- Dynamically populated -->
+      </ul>
+    </aside>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="stat-card glass-card">
+        <div class="stat-icon">🚗</div>
+        <div>
+          <div class="stat-value" id="stat-vehicles">0</div>
+          <div class="stat-label">Total Vehicles</div>
+        </div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-icon">⏱️</div>
+        <div>
+          <div class="stat-value" id="stat-cycle">0<span style="font-size:12px;color:var(--text-muted)">s</span></div>
+          <div class="stat-label">Avg Cycle Time</div>
+        </div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-icon">📊</div>
+        <div>
+          <div class="stat-value" id="stat-congestion">--</div>
+          <div class="stat-label">Congestion Level</div>
+        </div>
+      </div>
+      <div class="stat-card glass-card">
+        <div class="stat-icon">🤖</div>
+        <div>
+          <div class="stat-value" id="stat-mode">AUTO</div>
+          <div class="stat-label">AI Mode</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Traffic Visualization -->
+      <div class="traffic-viz glass-card">
+        <h3>🔴🟡🟢 Live Intersection View — <span id="selected-intersection-name">Select an intersection</span></h3>
+        <canvas id="traffic-canvas" width="500" height="380"></canvas>
+        <div class="timings-grid" id="timings-grid">
+          <div class="timing-card">
+            <div class="dir-label">North</div>
+            <div class="dir-green" id="timing-north">--<span>s</span></div>
+            <div class="dir-vehicles" id="vehicles-north">0 vehicles</div>
+          </div>
+          <div class="timing-card">
+            <div class="dir-label">South</div>
+            <div class="dir-green" id="timing-south">--<span>s</span></div>
+            <div class="dir-vehicles" id="vehicles-south">0 vehicles</div>
+          </div>
+          <div class="timing-card">
+            <div class="dir-label">East</div>
+            <div class="dir-green" id="timing-east">--<span>s</span></div>
+            <div class="dir-vehicles" id="vehicles-east">0 vehicles</div>
+          </div>
+          <div class="timing-card">
+            <div class="dir-label">West</div>
+            <div class="dir-green" id="timing-west">--<span>s</span></div>
+            <div class="dir-vehicles" id="vehicles-west">0 vehicles</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="chart-panel glass-card">
+        <h3>📈 Traffic Flow Over Time</h3>
+        <canvas id="flow-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="right-panel">
+      <!-- Alerts -->
+      <div class="alerts-panel glass-card">
+        <h3>🔔 Alerts</h3>
+        <div class="alerts-feed" id="alerts-feed">
+          <div class="alert-item" style="color:var(--text-muted); border-left-color:var(--text-muted);">
+            No alerts yet...
+          </div>
+        </div>
+      </div>
+
+      <!-- Direction Distribution Chart -->
+      <div class="chart-panel glass-card">
+        <h3>🥧 Direction Distribution</h3>
+        <canvas id="pie-chart"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/trafficVisualization.js"></script>
+  <script src="/js/socketClient.js"></script>
+  <script src="/js/dashboard.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

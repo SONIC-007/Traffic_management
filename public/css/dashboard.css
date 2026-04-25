@@ -1,0 +1,327 @@
+/* ===== DASHBOARD STYLES ===== */
+
+/* ---- Header ---- */
+.header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-left .logo {
+  font-size: 20px;
+}
+
+.header-left h1 {
+  font-size: 16px;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-right .user-info {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.header-right .user-role {
+  font-size: 11px;
+  color: var(--accent-purple);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ---- Main Layout ---- */
+.dashboard {
+  display: grid;
+  grid-template-columns: 260px 1fr 300px;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "sidebar stats stats"
+    "sidebar main right";
+  gap: 16px;
+  padding: 16px;
+  min-height: calc(100vh - 60px);
+}
+
+/* ---- Sidebar (Intersection List) ---- */
+.sidebar {
+  grid-area: sidebar;
+}
+
+.sidebar h2 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.intersection-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.intersection-item {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.intersection-item:hover {
+  background: var(--bg-glass);
+  border-color: var(--border-color);
+}
+
+.intersection-item.active {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.intersection-item .int-name {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.intersection-item .int-status {
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.intersection-item .int-status .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-green);
+}
+
+/* ---- Stats Bar ---- */
+.stats-bar {
+  grid-area: stats;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+}
+
+.stat-card .stat-icon {
+  font-size: 28px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--bg-secondary);
+}
+
+.stat-card .stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  line-height: 1;
+}
+
+.stat-card .stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ---- Main Content Area ---- */
+.main-content {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Traffic Visualization Box */
+.traffic-viz {
+  position: relative;
+  padding: 16px;
+  min-height: 420px;
+}
+
+.traffic-viz h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.traffic-viz canvas {
+  display: block;
+  margin: 0 auto;
+  border-radius: var(--radius-sm);
+}
+
+/* Signal Timings Display */
+.timings-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.timing-card {
+  text-align: center;
+  padding: 12px 8px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+.timing-card .dir-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.timing-card .dir-green {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--signal-green);
+}
+
+.timing-card .dir-green span {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.timing-card .dir-vehicles {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* ---- Right Panel ---- */
+.right-panel {
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Alerts Feed */
+.alerts-panel h3,
+.chart-panel h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.alerts-feed {
+  max-height: 240px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.alert-item {
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  background: var(--bg-secondary);
+  border-left: 3px solid var(--accent-yellow);
+  animation: slideInRight 0.3s ease;
+}
+
+.alert-item.critical {
+  border-left-color: var(--accent-red);
+}
+
+.alert-item .alert-time {
+  color: var(--text-muted);
+  font-size: 10px;
+  font-family: var(--font-mono);
+  margin-top: 4px;
+}
+
+/* Charts */
+.chart-panel {
+  padding: 16px;
+}
+
+.chart-panel canvas {
+  max-height: 200px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1100px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    grid-row: auto;
+  }
+
+  .stats-bar {
+    grid-column: 1;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .right-panel {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .stats-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .timings-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .header {
+    padding: 0 12px;
+  }
+}
