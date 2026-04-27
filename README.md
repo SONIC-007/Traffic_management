@@ -11,7 +11,7 @@ A full-stack real-time traffic management system that uses **AI-driven adaptive 
 - **Traffic simulation engine** — generates realistic traffic data with time-of-day patterns
 - **Interactive dashboard** — live visualization of intersection traffic data
 - **User authentication** — JWT-based login/register with role-based access control (RBAC)
-- **RESTful API** — CRUD operations for intersections, traffic logs, and signal control
+- **RESTful API** — CRUD operations for intersections, traffic logs, and signal control.
 
 ---
 
